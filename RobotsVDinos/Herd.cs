@@ -8,5 +8,11 @@ namespace RobotsVDinos
 {
     internal class Herd
     {
+        public List<Dinosaur> dinosaurs { get; set; }
+
+        public Herd()
+        {
+            dinosaurs = new List<Dinosaur>();
+        }
     }
 }

@@ -8,5 +8,11 @@ namespace RobotsVDinos
 {
     internal class Fleet
     {
+        public List<Robot> robots { get; set; }
+
+        public Fleet()
+        {
+            robots = new List<Robot>();
+        }
     }
 }

@@ -14,13 +14,20 @@ namespace RobotsVDinos
         public Weapon Weapon { get; set; }
         public int AttackPower { get; set; }
 
-        public Robot(string name, int health, int powerLevel, Weapon weapon, int attackPower)
+        public Robot(string name, Weapon weapon)
         {
             Name = name;
-            Health = health;
-            PowerLevel = powerLevel;
+            Health = 100;
+            PowerLevel = 100;
             Weapon = weapon;
-            AttackPower = attackPower;
+            AttackPower = 5;
+        }
+
+        public int Attack()
+        {
+
+            PowerLevel -= 10;
+            return AttackPower;
         }
     }
 }

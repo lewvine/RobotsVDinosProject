@@ -14,12 +14,12 @@ namespace RobotsVDinos
         public int Energy { get; set; }
         public int AttackPower { get; set; }
 
-        public Dinosaur(string type, int health, int energy, int attackPower)
+        public Dinosaur(string type)
         {
             Type = type;
-            Health = health;
-            Energy = energy;
-            AttackPower = attackPower;
+            Health = 100;
+            Energy = 100;
+            AttackPower = 7;
         }
     }
 }
