@@ -20,7 +20,7 @@ namespace RobotsVDinos
             Health = 100;
             PowerLevel = 100;
             Weapon = weapon;
-            AttackPower = 5;
+            AttackPower = weapon.AttackPower;
         }
 
         public int Attack()

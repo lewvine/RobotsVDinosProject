@@ -8,8 +8,8 @@ namespace RobotsVDinos
 {
     internal class Weapon
     {
-        string Type { get; set; }
-        int AttackPower { get; set; }
+        public string Type { get; set; }
+        public int AttackPower { get; set; }
         public Weapon(string type, int attackPower)
         {
             Type = type;
