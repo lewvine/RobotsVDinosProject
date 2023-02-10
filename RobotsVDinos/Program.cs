@@ -7,8 +7,7 @@ List<Weapon> weapons = CreateWeapons();
 Herd herd = CreateHerd();
 Fleet fleet = CreateFleet(weapons);
 
-Console.WriteLine("Welcome to Robots versus Dinosaurs!");
-Console.WriteLine("In Robots versus Dinosaurs, you play the Robot, and fight against Dinosaurs!  Each team has three members");
+Menu();
 Console.WriteLine("Ready to get started?  (TYPE 'YES' TO GET STARTED)");
 string answer = Console.ReadLine();
 
@@ -80,8 +79,82 @@ Herd CreateHerd()
     return herd;
 }
 
-void ShowWeaponsList()
+void Header()
 {
+    Console.WriteLine("           ROBOTS VERSUS DINOSAURS              ");
+    Console.WriteLine("------------------------------------------------");
+}
+
+void Menu()
+{
+    Header();
+    Console.WriteLine("MENU");
+    Console.WriteLine("----------------");
+    Console.WriteLine("New Game     - N");
+    Console.WriteLine("Resume Game  - R");
+    Console.WriteLine("Quit Game    - Q");
+    Console.WriteLine("Show Weapons - W");
+    Console.WriteLine("Show Fleet   - F");
+    Console.WriteLine("Show Herd    - H");
+    string answer = Console.ReadLine();
+    Router(answer);
+}
+
+void Router(string answer)
+{
+    switch (answer)
+    {
+        case "F":
+            ShowFleet();
+            break;
+        case "H":
+            ShowHerd();
+            break;
+        case "W":
+            ShowWeapons();
+            break;
+        default:
+            Console.WriteLine("That was not a valid entry.  Please try again:");
+            Console.WriteLine("----------------------------------------------");
+            Menu();
+            break;
+    }
+}
+
+
+void ShowFleet()
+{
+    Console.Clear();
+    Console.WriteLine("THE FLEET");
+    Console.WriteLine("----------------------------------------");
+    Console.WriteLine();
+    Console.WriteLine("NAME    WEAPON    ATTACK POWER  POWER LEVEL  HEALTH");
+    Console.WriteLine("---------------------------------------------------");
+    foreach (Robot robot in fleet.robots)
+    {
+    Console.WriteLine($"{robot.Name.ToUpper()}    {robot.Weapon.Type.ToUpper()}  {robot.Weapon.AttackPower} {robot.PowerLevel}%   {robot.Health}%");
+    }
+        answer = Console.ReadLine();
+}
+
+void ShowHerd()
+{
+    Console.Clear();
+    Console.WriteLine("THE HERD");
+    Console.WriteLine("----------------------------------------");
+    Console.WriteLine();
+    Console.WriteLine("TYPE   ATTACK POWER  ENERGY  HEALTH");
+    Console.WriteLine("-----------------------------------");
+    foreach (Dinosaur dino in herd.dinosaurs)
+    {
+        Console.WriteLine($"{dino.Type.ToUpper()}    {dino.AttackPower}  {dino.Energy}% {dino.Health}%");
+    }
+    answer = Console.ReadLine();
+}
+
+void ShowWeapons()
+{
+    Console.Clear();
     Console.WriteLine("Here is the list of available weapons:");
     Console.WriteLine();
     Console.WriteLine("NAME      ATTACK POWER");
