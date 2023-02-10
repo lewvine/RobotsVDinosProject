@@ -2,42 +2,88 @@
 
 using RobotsVDinos;
 
-//Set up the game
-List<Weapon> weapons = CreateWeapons();
-Herd herd = CreateHerd();
-Fleet fleet = CreateFleet(weapons);
-
+List<Weapon> weapons = new List<Weapon>();
+Herd herd = new Herd();
+Fleet fleet = new Fleet();
+string answer;
 Menu();
-Console.WriteLine("Ready to get started?  (TYPE 'YES' TO GET STARTED)");
-string answer = Console.ReadLine();
 
-if(answer == "YES")
+//Set up the game
+void SetupGame()
+{
+    weapons = CreateWeapons();
+    herd = CreateHerd();
+    fleet = CreateFleet(weapons);
+}
+
+void NewGame()
+{
+    SetupGame();
+    Game();
+}
+
+void Game()
+{
+
+    Console.WriteLine("WELCOME TO ROBOTS VERSUS ALIENS!");
+    Console.WriteLine("--------------------------------");
+    int roundNumber = 1;
+    while(fleet.robots.Count > 0 && herd.dinosaurs.Count > 0)
+    {
+        Round(fleet.robots[0], herd.dinosaurs[0], roundNumber);
+    }
+}
+
+void Round(Robot robot, Dinosaur dino, int roundNumber)
+{
+    Console.WriteLine("ROUND " + roundNumber + ":");
+    Console.WriteLine("--------");
+    Console.WriteLine(robot.Name.ToUpper() + " versus " + dino.Type.ToUpper() + ".  FIGHT!");
+    int turnCount = 1;
+    Thread.Sleep(1000);
+    while(robot.Health > 0 && dino.Health > 0)
+    {
+        Turn(robot, dino, turnCount);
+        turnCount++;
+    }
+    //If Robot loses
+    if (robot.Health <= 0) 
+    { 
+        Console.WriteLine(robot.Name.ToUpper() + " IS DEFEATED!  " + dino.Type.ToUpper() + " WINS!");
+        fleet.robots.Remove(robot);
+    }
+
+    //If Dino wins
+    if (dino.Health <= 0) 
+    { 
+        Console.WriteLine(dino.Type.ToUpper() + " IS DEFEATED!  " + robot.Name.ToUpper() + " WINS!" );
+        herd.dinosaurs.Remove(dino);
+    }
+    roundNumber++;
+}
+
+
+void Turn(Robot robot, Dinosaur dino, int turnNumber)
 {
     Console.Clear();
-    Console.WriteLine("GREAT!  Your three robots are:");
-    foreach (Robot robot in fleet.robots)
-    {
-        Console.WriteLine($"{robot.Name} equipped with a {robot.Weapon.Type} with an attack value of {robot.Weapon.AttackPower}");
-    }
-    Console.WriteLine("Would you like to switch weapons? (TYPE 'YES' OR 'NO')");
-    answer = Console.ReadLine();
+    Console.WriteLine("TURN " + turnNumber + ": FIGHT!");
+    Console.WriteLine("-----------------------------");
+    Console.WriteLine();
+    robot.Attack(dino);
+    dino.Attack(robot);
+    Console.ReadLine();
+    Console.WriteLine("");
+    Console.WriteLine("ROUND RESULTS:");
+    Console.WriteLine("--------------");
+    Console.WriteLine(dino.Type + " has " + dino.Health + " Health and " + dino.Energy + " Energy left.");
+    Console.WriteLine(robot.Name + " has " + robot.Health + " Health and " + robot.PowerLevel + " Power left.");
+    Console.ReadLine();
 }
 
-if (answer == "YES")
-{
-    Console.WriteLine("Which robot would you like to switch weapons for?");
-    foreach (Robot robot in fleet.robots)
-    {
-        Console.WriteLine($"{robot.Name} -- (TYPE '{fleet.robots.IndexOf(robot)}')");
-    }
-    answer = Console.ReadLine();
-}
 
 List<Weapon> CreateWeapons()
 {
     //Create and populate weapons list and weapons
-    List<Weapon> weapons = new List<Weapon>();
-
     Weapon sword = new Weapon("sword", 5);
     Weapon halberd = new Weapon("halberd", 10);
     Weapon mace = new Weapon("mace", 15);
@@ -52,8 +98,6 @@ List<Weapon> CreateWeapons()
 Fleet CreateFleet(List<Weapon> weapons)
 {
     //Create and populate fleet and robots
-    Fleet fleet = new Fleet();
-
     Robot c3p0 = new Robot("c3po", weapons[0]);
     Robot robo = new Robot("robo", weapons[0]);
     Robot r2d2 = new Robot("r2d2", weapons[0]);
@@ -67,8 +111,6 @@ Fleet CreateFleet(List<Weapon> weapons)
 Herd CreateHerd()
 {
     //Create and populate herd and dinos
-    Herd herd = new Herd();
-
     Dinosaur rex = new Dinosaur("Rex");
     Dinosaur tbone = new Dinosaur("TBone");
     Dinosaur max = new Dinosaur("Max");
@@ -104,6 +146,9 @@ void Router(string answer)
 {
     switch (answer)
     {
+        case "N":
+            NewGame();
+            break;
         case "F":
             ShowFleet();
             break;

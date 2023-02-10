@@ -21,5 +21,13 @@ namespace RobotsVDinos
             Energy = 100;
             AttackPower = 7;
         }
+
+        public void Attack(Robot robot)
+        {
+            Console.WriteLine(Type + "'s turn to attack.");
+            Console.WriteLine(Type + " attacks!  Inflicts " + AttackPower + " damage!");
+            Energy -= 10;
+            robot.Health -= AttackPower;
+        }
     }
 }

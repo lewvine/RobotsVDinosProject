@@ -23,11 +23,14 @@ namespace RobotsVDinos
             AttackPower = weapon.AttackPower;
         }
 
-        public int Attack()
+        public void Attack(Dinosaur dino)
         {
-
+            Console.WriteLine(Name + "'s turn to attack.");
+            Console.WriteLine("ATTACK NOW!  (Press ENTER to attack");
+            Console.ReadLine();
+            Console.WriteLine(Name + " attacks with " + Weapon.Type + ".  Inflicts " + AttackPower + " damage!");
             PowerLevel -= 10;
-            return AttackPower;
+            dino.Health -= AttackPower;
         }
     }
 }
