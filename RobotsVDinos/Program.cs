@@ -34,17 +34,22 @@ fleet.robots.Add(robo);
 fleet.robots.Add(r2d2);
 
 Console.WriteLine("Welcome to Robots versus Dinosaurs!");
-Console.WriteLine("In Robots versus Dinosaurs, you play the Robot, and fight against Dinosaurs!" +
-    "  Each team has three members");
-Console.WriteLine("Ready to get started?  (PLEASE SELECT ENTER)");
-Console.ReadLine();
-Console.WriteLine("Your three robots are:");
-foreach(Robot robot in fleet.robots)
-{
-    Console.WriteLine($"{robot.Name} equipped with a {robot.Weapon.Type} with an attack value of {robot.Weapon.AttackPower}");
-}
-Console.WriteLine("Would you like to switch weapons? (TYPE 'YES' OR 'NO')");
+Console.WriteLine("In Robots versus Dinosaurs, you play the Robot, and fight against Dinosaurs!  Each team has three members");
+Console.WriteLine("Ready to get started?  (TYPE 'YES' TO GET STARTED)");
 string answer = Console.ReadLine();
+
+if(answer == "YES")
+{
+    Console.Clear();
+    Console.WriteLine("GREAT!  Your three robots are:");
+    foreach (Robot robot in fleet.robots)
+    {
+        Console.WriteLine($"{robot.Name} equipped with a {robot.Weapon.Type} with an attack value of {robot.Weapon.AttackPower}");
+    }
+    Console.WriteLine("Would you like to switch weapons? (TYPE 'YES' OR 'NO')");
+    answer = Console.ReadLine();
+}
+
 if (answer == "YES")
 {
     Console.WriteLine("Which robot would you like to switch weapons for?");
@@ -52,5 +57,26 @@ if (answer == "YES")
     {
         Console.WriteLine($"{robot.Name} -- (TYPE '{fleet.robots.IndexOf(robot)}')");
     }
-    Console.ReadLine();
+    answer = Console.ReadLine();
+}
+
+//WEAPONS LIST
+Console.WriteLine("Here is the list of available weapons:");
+Console.WriteLine();
+Console.WriteLine("NAME      ATTACK POWER");
+Console.WriteLine("----------------------");
+int space;
+foreach (Weapon weapon in weapons)
+{
+    string output = weapon.Type.ToUpper() + " ";
+    if(output.Length < 10)
+    {
+        int count = 10 - output.Length;
+        for(int i = 0; i < count; i++)
+        {
+            output += " ";
+        }
+    }
+    output += weapon.AttackPower;
+    Console.WriteLine(output);
 }
