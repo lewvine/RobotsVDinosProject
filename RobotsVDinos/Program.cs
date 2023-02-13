@@ -72,12 +72,6 @@ void Turn(Robot robot, Dinosaur dino, int turnNumber)
     robot.Attack(dino);
     dino.Attack(robot);
     Console.ReadLine();
-    Console.WriteLine("");
-    Console.WriteLine("ROUND RESULTS:");
-    Console.WriteLine("--------------");
-    Console.WriteLine(dino.Type + " has " + dino.Health + " Health and " + dino.Energy + " Energy left.");
-    Console.WriteLine(robot.Name + " has " + robot.Health + " Health and " + robot.PowerLevel + " Power left.");
-    Console.ReadLine();
 }
 
 

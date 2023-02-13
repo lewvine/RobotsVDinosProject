@@ -24,10 +24,14 @@ namespace RobotsVDinos
 
         public void Attack(Robot robot)
         {
-            Console.WriteLine(Type + "'s turn to attack.");
-            Console.WriteLine(Type + " attacks!  Inflicts " + AttackPower + " damage!");
             Energy -= 10;
             robot.Health -= AttackPower;
+            Console.WriteLine(Type + "'s turn to attack.");
+            Console.WriteLine(
+                Type + " attacks!  Inflicts " + AttackPower + " damage!  "
+                + robot.Name + " has " + robot.Health + "% health left.  " +
+                Type + " has " + Energy + "% energy left."
+                );
         }
     }
 }
