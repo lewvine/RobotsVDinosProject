@@ -26,12 +26,14 @@ namespace RobotsVDinos
         public void Attack(Dinosaur dino)
         {
             PowerLevel -= 10;
-            dino.Health -= AttackPower;
+            Random random = new Random();   
+            int attackValue = random.Next(1, 11) * AttackPower;
+            dino.Health -= attackValue;
             Console.WriteLine(Name + "'s turn to attack.");
             Console.WriteLine("ATTACK NOW!  (Press ENTER to attack)");
             Console.ReadLine();
             Console.WriteLine(
-                Name + " attacks with " + Weapon.Type + ".  Inflicts " + AttackPower + " damage!  "
+                Name + " attacks with " + Weapon.Type + ".  Inflicts " + attackValue + " damage!  "
                 + dino.Type + " has " + dino.Health + "% health left.  "
                 + Name + " has " + PowerLevel + "% power left."
             );

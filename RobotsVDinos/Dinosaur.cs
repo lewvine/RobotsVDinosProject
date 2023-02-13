@@ -19,16 +19,18 @@ namespace RobotsVDinos
             Type = type;
             Health = 100;
             Energy = 100;
-            AttackPower = 7;
+            AttackPower = 3;
         }
 
         public void Attack(Robot robot)
         {
+            Random random = new Random();
+            int attackValue = random.Next(1, 11) * AttackPower;
             Energy -= 10;
-            robot.Health -= AttackPower;
+            robot.Health -= attackValue;
             Console.WriteLine(Type + "'s turn to attack.");
             Console.WriteLine(
-                Type + " attacks!  Inflicts " + AttackPower + " damage!  "
+                Type + " attacks!  Inflicts " + attackValue + " damage!  "
                 + robot.Name + " has " + robot.Health + "% health left.  " +
                 Type + " has " + Energy + "% energy left."
                 );

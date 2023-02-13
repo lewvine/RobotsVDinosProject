@@ -78,9 +78,9 @@ void Turn(Robot robot, Dinosaur dino, int turnNumber)
 List<Weapon> CreateWeapons()
 {
     //Create and populate weapons list and weapons
-    Weapon sword = new Weapon("sword", 5);
-    Weapon halberd = new Weapon("halberd", 10);
-    Weapon mace = new Weapon("mace", 15);
+    Weapon sword = new Weapon("sword", 3);
+    Weapon halberd = new Weapon("halberd", 3);
+    Weapon mace = new Weapon("mace", 3);
 
     weapons.Add(sword);
     weapons.Add(halberd);
